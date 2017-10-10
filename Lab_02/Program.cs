@@ -146,15 +146,15 @@ namespace Lab_02
         }
         
         static void Demo_OddEvenNumbersByRxNetExample(){
-            NumberGenerator ng = new NumberGenerator(500);
+            NumberGenerator ng = new NumberGenerator(1000);
             var observable = Observable.ToObservable(ng.GenerateNumbers(), Scheduler.Default);
             var oddNumberObserver = new OddNumberObserver();
             var evenNumberObserver = new EvenNumberObserver();
 
-
             Console.WriteLine("Press any key to exit.");
 
             observable
+                .Skip(10)
                 .Where(number => number %2 ==0)
                 .Subscribe(oddNumberObserver);
 
