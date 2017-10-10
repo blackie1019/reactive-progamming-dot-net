@@ -40,27 +40,27 @@ namespace Lab_01 {
             } while (isContinue);
         }
         static void Demo_Array () {
-            IObservable<string> strings =
+            IObservable<string> subject =
                 new [] { "Jordan", "Kobe", "James", "Durant" }.ToObservable ();
 
             Console.WriteLine ("Player Name StartsWith J and ToUpper ");
 
             IDisposable subscription =
-                strings.Where (str => str.StartsWith ("J"))
+                subject.Where (str => str.StartsWith ("J"))
                 .Select (str => str.ToUpper ())
                 .Subscribe (Console.WriteLine);
 
             subscription.Dispose ();
         }
         static void Demo_LinqWithSubscribling(){
-            var result = 
+            var subject = 
                 from i in Observable.Range(1, 100) 
                 from j in Observable.Range(1, 100) 
                 from k in Observable.Range(1, 100) 
                 where k * k == i * i + j * j 
                 select new { a = i, b = j, c = k };   
         
-            IDisposable subscription = result.Subscribe( 
+            IDisposable subscription = subject.Subscribe( 
             x => Console.WriteLine("OnNext: {0}", x),  
             ex => Console.WriteLine("OnError: {0}", ex.Message), 
             () => Console.WriteLine("OnCompleted")); 

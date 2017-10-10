@@ -66,11 +66,11 @@ namespace Lab_02
         }
 
         static void Demo_MyObservable () {
-            var observable = new MyObservable(5,8);
+            var subject = new MyObservable(5,8);
             
             var observer = new MyObserver();
 
-            var subscription = observable.Subscribe(observer);
+            var subscription = subject.Subscribe(observer);
 
             Console.WriteLine("Press any key to dispose the subscription...");
             Console.ReadKey();
@@ -79,9 +79,9 @@ namespace Lab_02
         }
         
         static void Demo_MyObserverLambda () {
-            var observable = Observable.Range(5, 8);
+            var subject = Observable.Range(5, 8);
             
-            var subscription = observable.Subscribe(
+            var subscription = subject.Subscribe(
                 (input) =>{Console.WriteLine($"Id:{Thread.CurrentThread.ManagedThreadId.ToString()}:{input}");},
                 (err) => {Console.WriteLine(err.Message);},
                 () => {Console.WriteLine("completed");}
@@ -96,7 +96,7 @@ namespace Lab_02
 
         static void Demo_MyObserverLambdaWithNewThread () {
             
-            var source = Observable.Range(5, 8)
+            var subscription = Observable.Range(5, 8)
                 .SelectMany(i=>Observable.Start(()=>i, NewThreadScheduler.Default))
                 //.ObserveOn(NewThreadScheduler.Default)
                 .Subscribe(
@@ -107,15 +107,15 @@ namespace Lab_02
             Console.WriteLine("Press any key to dispose the subscription...");
             Console.ReadKey();
             Console.WriteLine();
-            source.Dispose();
+            subscription.Dispose();
         }
 
         static void Demo_MyObserver () {
-            var observable = Observable.Range (5, 8);
+            var subject = Observable.Range (5, 8);
 
             var observer = new MyObserver();
 
-            var subscription = observable.Subscribe(observer);
+            var subscription = subject.Subscribe(observer);
 
             Console.WriteLine("Press any key to dispose the subscription...");
             Console.ReadKey ();
