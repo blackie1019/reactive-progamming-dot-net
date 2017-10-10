@@ -17,7 +17,7 @@ namespace Lab_02
             }
             observer.OnCompleted ();
 
-            return new EmptyDisposable { action = () => Console.WriteLine("Dispose Done!") };
+            return new EmptyDisposable { action = () => Console.WriteLine("EvenNumberObservable Dispose Done!") };
         }
     }
 }

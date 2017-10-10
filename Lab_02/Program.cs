@@ -30,6 +30,7 @@ namespace Lab_02
                 Console.WriteLine("(d) Demo MyObservable");
                 Console.WriteLine("(e) Demo EvenNumbers");
                 Console.WriteLine("(r) Demo EvenNumbers by Rx.NET Example");
+                Console.WriteLine("(n) Demo Odd and Even Numbers by Rx.NET Example");
                 Console.WriteLine("(q) Exit Menu");
 
                 var keyInfo = Console.ReadKey();
@@ -56,6 +57,9 @@ namespace Lab_02
                         break;
                     case ConsoleKey.R:
                         Demo_EvenNumbersByRxNetExample ();
+                        break;
+                    case ConsoleKey.N:
+                        Demo_OddEvenNumbersByRxNetExample ();
                         break;
                     default:
                         Console.WriteLine("Unknow, please re-try!!");
@@ -123,7 +127,7 @@ namespace Lab_02
             subscription.Dispose ();
         }
 
-                static void Demo_EvenNumbers () {
+        static void Demo_EvenNumbers () {
             IEnumerable<int> number_sequence = new int[] { 1, 2, 3, 4, 5, 6, 8 };
 
             foreach (var n in number_sequence){
@@ -134,10 +138,31 @@ namespace Lab_02
         }
 
         static void Demo_EvenNumbersByRxNetExample () {
+
             IDisposable subscription = new EvenNumberObservable (new [] { 1, 2, 3, 4, 6, 7, 8 })
                 .Subscribe (new EvenNumberObserver ());
 
             subscription.Dispose ();
+        }
+        
+        static void Demo_OddEvenNumbersByRxNetExample(){
+            NumberGenerator ng = new NumberGenerator(500);
+            var observable = Observable.ToObservable(ng.GenerateNumbers(), Scheduler.Default);
+            var oddNumberObserver = new OddNumberObserver();
+            var evenNumberObserver = new EvenNumberObserver();
+
+
+            Console.WriteLine("Press any key to exit.");
+
+            observable
+                .Where(number => number %2 ==0)
+                .Subscribe(oddNumberObserver);
+
+            observable
+                .Where(number => number % 2 == 1)
+                .Subscribe(evenNumberObserver);
+
+            Console.ReadKey();
         }
     }
 }
