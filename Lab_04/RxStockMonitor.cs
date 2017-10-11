@@ -1,9 +1,9 @@
 using System;
 using System.Reactive.Linq;
 
-using Lab_03.Domain;
+using Lab_04.Domain;
 
-namespace Lab_03
+namespace Lab_04
 {
     public class RxStockMonitor : IDisposable
     {

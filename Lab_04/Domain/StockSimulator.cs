@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Lab_03.Domain
+namespace Lab_04.Domain
 {
         public class StockSimulator
     {

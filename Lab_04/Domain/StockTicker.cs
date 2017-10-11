@@ -1,6 +1,6 @@
 using System;
 
-namespace Lab_03.Domain
+namespace Lab_04.Domain
 {
     public class StockTicker : IStockTicker
     {

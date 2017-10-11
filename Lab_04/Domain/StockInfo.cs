@@ -1,4 +1,4 @@
-namespace Lab_03.Domain
+namespace Lab_04.Domain
 {
     class StockInfo
     {
