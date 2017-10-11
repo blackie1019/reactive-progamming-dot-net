@@ -9,10 +9,10 @@ using System.Collections.Generic;
 namespace Lab_02
 {
     public class Program {
-        static void Main (string[] args) {
+        static void Main (string[] args) 
+        {
             
-            var threadId = Thread.CurrentThread.ManagedThreadId.ToString ();
-            Console.WriteLine ($"Program is runing on thread with Id:{threadId}");
+            Console.WriteLine ("Program is runing");
             
             Demo();
 
@@ -24,10 +24,6 @@ namespace Lab_02
             
             do{
                 Console.WriteLine("======Press demo key to represent...=====");
-                Console.WriteLine("(a) Demo MyObserver");
-                Console.WriteLine("(b) Demo MyObserver with Lambda");
-                Console.WriteLine("(c) Demo MyObserver with Lambda and NewThread");
-                Console.WriteLine("(d) Demo MyObservable");
                 Console.WriteLine("(e) Demo EvenNumbers");
                 Console.WriteLine("(r) Demo EvenNumbers by Rx.NET Example");
                 Console.WriteLine("(n) Demo Odd and Even Numbers by Rx.NET Example");
@@ -39,18 +35,6 @@ namespace Lab_02
                 switch(keyInfo.Key){
                     case ConsoleKey.Q:
                         isContinue = false;
-                        break;
-                    case ConsoleKey.A:
-                        Demo_MyObserver();
-                        break;
-                    case  ConsoleKey.B:
-                        Demo_MyObserverLambda();
-                        break;
-                    case  ConsoleKey.C:
-                        Demo_MyObserverLambdaWithNewThread();
-                        break;
-                    case  ConsoleKey.D:
-                        Demo_MyObservable();
                         break;
                     case ConsoleKey.E:
                         Demo_EvenNumbers ();
@@ -68,65 +52,6 @@ namespace Lab_02
 
             }while(isContinue); 
         }
-
-        static void Demo_MyObservable () {
-            var subject = new MyObservable(5,8);
-            
-            var observer = new MyObserver();
-
-            var subscription = subject.Subscribe(observer);
-
-            Console.WriteLine("Press any key to dispose the subscription...");
-            Console.ReadKey();
-            Console.WriteLine();
-            subscription.Dispose();
-        }
-        
-        static void Demo_MyObserverLambda () {
-            var subject = Observable.Range(5, 8);
-            
-            var subscription = subject.Subscribe(
-                (input) =>{Console.WriteLine($"Id:{Thread.CurrentThread.ManagedThreadId.ToString()}:{input}");},
-                (err) => {Console.WriteLine(err.Message);},
-                () => {Console.WriteLine("completed");}
-            );
-
-            Console.WriteLine("Press any key to dispose the subscription...");
-            Console.ReadKey();
-            Console.WriteLine();
-            subscription.Dispose();
-        }
-
-
-        static void Demo_MyObserverLambdaWithNewThread () {
-            
-            var subscription = Observable.Range(5, 8)
-                .SelectMany(i=>Observable.Start(()=>i, NewThreadScheduler.Default))
-                //.ObserveOn(NewThreadScheduler.Default)
-                .Subscribe(
-                    (input) =>{Console.WriteLine($"Id:{Thread.CurrentThread.ManagedThreadId.ToString()}:{input}");},
-                    (err) => {Console.WriteLine(err.Message);},
-                    () => {Console.WriteLine("completed");});
-
-            Console.WriteLine("Press any key to dispose the subscription...");
-            Console.ReadKey();
-            Console.WriteLine();
-            subscription.Dispose();
-        }
-
-        static void Demo_MyObserver () {
-            var subject = Observable.Range (5, 8);
-
-            var observer = new MyObserver();
-
-            var subscription = subject.Subscribe(observer);
-
-            Console.WriteLine("Press any key to dispose the subscription...");
-            Console.ReadKey ();
-            Console.WriteLine();
-            subscription.Dispose ();
-        }
-
         static void Demo_EvenNumbers () {
             IEnumerable<int> number_sequence = new int[] { 1, 2, 3, 4, 5, 6, 8 };
 

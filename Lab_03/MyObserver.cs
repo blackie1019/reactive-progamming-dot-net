@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace Lab_02
+namespace Lab_03
 {
     public class MyObserver: IObserver<int>
     {

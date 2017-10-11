@@ -1,6 +1,6 @@
 using System;
 
-namespace Lab_02
+namespace Lab_03
 {
     public class MyObservable : IObservable<int> {
         private int _start;
