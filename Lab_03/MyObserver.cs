@@ -7,7 +7,7 @@ namespace Lab_03
     {
         public void OnNext(int value){
             var threadId = Thread.CurrentThread.ManagedThreadId.ToString();
-            Console.WriteLine($"Value received on thread with Id:{threadId}:{value}");
+            Console.WriteLine($"Value:{value} received on thread with Id:{threadId}");
         }
         
         public void OnError(Exception ex){
