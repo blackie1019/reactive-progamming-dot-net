@@ -4,7 +4,7 @@
 
 ## Slide ##
 
-TBD
+- [響應式程式開發之 .NET Core 應用 ](https://www.slideshare.net/chentientsai/net-core-80761198)
 
 ## Pre-requisite and Setup ##
 
