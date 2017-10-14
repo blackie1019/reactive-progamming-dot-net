@@ -63,7 +63,7 @@ namespace Lab_02
         }
 
         static void Demo_EvenNumbersByRxNetExample () {
-            
+
             IDisposable subscription = new EvenNumberObservable (new [] { 1, 2, 3, 4, 6, 7, 8 })
                 .Subscribe (new EvenNumberObserver ());
 
@@ -76,8 +76,6 @@ namespace Lab_02
             var oddNumberObserver = new OddNumberObserver();
             var evenNumberObserver = new EvenNumberObserver();
 
-            Console.WriteLine("Press any key to exit.");
-
             observable
                 .Skip(10)
                 .Where(number => number %2 ==0)
@@ -87,7 +85,6 @@ namespace Lab_02
                 .Where(number => number % 2 == 1)
                 .Subscribe(evenNumberObserver);
 
-            Console.ReadKey();
         }
     }
 }
