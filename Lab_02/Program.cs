@@ -63,7 +63,7 @@ namespace Lab_02
         }
 
         static void Demo_EvenNumbersByRxNetExample () {
-
+            
             IDisposable subscription = new EvenNumberObservable (new [] { 1, 2, 3, 4, 6, 7, 8 })
                 .Subscribe (new EvenNumberObserver ());
 

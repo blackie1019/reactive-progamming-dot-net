@@ -24,8 +24,8 @@ namespace Lab_00 {
                 Console.WriteLine ("(q) Exit Menu");
 
                 var keyInfo = Console.ReadKey ();
-                Console.WriteLine ();
-
+                Console.WriteLine();
+                
                 while (true) {
                     switch (keyInfo.Key) {
                         case ConsoleKey.Q:
